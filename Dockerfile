@@ -10,7 +10,9 @@ RUN a2enmod rewrite && \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
+COPY public /var/www/html
+COPY . /var/www
 
-COPY ./src/public /var/www/html
-COPY ./src /var/www
+
+
 
