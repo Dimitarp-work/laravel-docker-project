@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NoteController;
+use Illuminate\Support\Facades\Artisan;
 
 //
 Route::get('/', function () {
@@ -21,7 +22,15 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('notes.index');
     })->name('dashboard');
 
+Route::get('/migrate-now', function () {
+    Artisan::call('migrate --force');
+    return '✅ Migrations run!';
+});
 
+Route::get('/key-now', function () {
+    Artisan::call('key:generate');
+    return '✅ App key generated!';
+});
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
