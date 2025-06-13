@@ -16,9 +16,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/migrate-now', function () {
-    Artisan::call('migrate --force');
-    return 'Migration done!';
+    \Illuminate\Support\Facades\Artisan::call('migrate --force');
+    return '✅ Migrations run!';
 });
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
