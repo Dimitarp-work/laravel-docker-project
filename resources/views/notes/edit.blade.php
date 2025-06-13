@@ -1,20 +1,17 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">Edit Note</x-slot>
 
-@section('content')
-<div class="container">
-    <h1>Edit Note</h1>
-    <form action="{{ route('notes.update', $note) }}" method="POST">
+    <form method="POST" action="{{ route('notes.update', $note) }}" class="space-y-4 mt-4">
         @csrf
         @method('PUT')
-        <div class="mb-3">
+        <div>
             <label>Title</label>
-            <input type="text" name="title" class="form-control" value="{{ $note->title }}" required>
+            <input type="text" name="title" value="{{ $note->title }}" class="w-full border p-2 rounded" required>
         </div>
-        <div class="mb-3">
+        <div>
             <label>Content</label>
-            <textarea name="content" class="form-control" rows="4" required>{{ $note->content }}</textarea>
+            <textarea name="content" rows="6" class="w-full border p-2 rounded" required>{{ $note->content }}</textarea>
         </div>
-        <button class="btn btn-primary">Update</button>
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Update</button>
     </form>
-</div>
-@endsection
+</x-app-layout>
