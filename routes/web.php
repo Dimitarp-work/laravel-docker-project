@@ -20,6 +20,7 @@ Route::get('/migrate-now', function () {
     return '✅ Migrations run!';
 });
 
+Route::redirect('/', '/notes');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
